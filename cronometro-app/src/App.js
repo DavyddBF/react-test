@@ -6,7 +6,7 @@ import cronometroImg from './assets/cronometro.png';
 function Btn(props) {
   return (
     <>
-      <a>{ props.title }</a>
+      <a className='btn' onClick={ props.click } >{ props.title }</a>
     </>
   );
 }
@@ -40,12 +40,12 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='container'>
         <img className='img' src={ cronometroImg } />
         <a className='timer' >{ tempo }</a>
-        <div>
-          <Btn title={btnTitle[0]} />
-          <Btn title={btnTitle[1]} />
+        <div className='area-btn'>
+          <Btn click={ iniciar } title={ btnTitle[0] } />
+          <Btn click={ iniciar } title={ btnTitle[1] } />
         </div>
     </div>
   );
