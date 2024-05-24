@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import './App.css';
 import cronometroImg from './assets/cronometro.png';
 
@@ -10,13 +12,17 @@ function Btn(props) {
 }
 
 function App() {
+
+  const [tempo, setTempo] = useState('0.0')
+  const [btnTitle, setBtnTitle] = useState([ 'Vai', 'Limpar' ])
+
   return (
     <div>
         <img className='img' src={ cronometroImg } />
-        <a className='timer' >0.0</a>
+        <a className='timer' >{ tempo }</a>
         <div>
-          <Btn title='Vai' />
-          <Btn title='Limpar' />
+          <Btn title={btnTitle[0]} />
+          <Btn title={btnTitle[1]} />
         </div>
     </div>
   );
