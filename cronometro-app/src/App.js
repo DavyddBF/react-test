@@ -15,21 +15,20 @@ function App() {
 
   const [tempo, setTempo] = useState(0);
   const [btnTitle, setBtnTitle] = useState([ 'Vai', 'Limpar' ]);
-  let temp = 0;
   let timer = useRef(null);
 
   const iniciar = () => {
 
-    if(timer !== null) {
+    if(timer.current !== null) {
 
-      clearInterval(timer);
-      timer = null;
+      clearInterval(timer.current);
+      timer.current = null;
 
       setBtnTitle([ 'Vai', 'Limpar' ]);
     } else {
 
-      timer = setInterval(() => {
-        setTempo( temp += 0.1 );
+      timer.current = setInterval(() => {
+        setTempo( tempo => tempo + 0.1 );
       }, 100);
 
       setBtnTitle([ 'Pausar', 'Limpar' ]);
@@ -37,9 +36,9 @@ function App() {
   }
 
   const limpar = () => {
-    if(timer !== null) {
-      clearInterval(timer);
-      timer == null;
+    if(timer.current !== null) {
+      clearInterval(timer.current);
+      timer.current = null;
     }
 
     setTempo(0);
