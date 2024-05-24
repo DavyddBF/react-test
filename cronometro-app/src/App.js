@@ -2,14 +2,7 @@ import { useState, useRef } from 'react';
 
 import './App.css';
 import cronometroImg from './assets/cronometro.png';
-
-function Btn(props) {
-  return (
-    <>
-      <a className='btn' onClick={ props.click } >{ props.title }</a>
-    </>
-  );
-}
+import Btn from './btn/Btn';
 
 function App() {
 
