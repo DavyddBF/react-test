@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import './App.css';
 import cronometroImg from './assets/cronometro.png';
@@ -16,7 +16,7 @@ function App() {
   const [tempo, setTempo] = useState(0);
   const [btnTitle, setBtnTitle] = useState([ 'Vai', 'Limpar' ]);
   let temp = 0;
-  let timer = null;
+  let timer = useRef(null);
 
   const iniciar = () => {
 
@@ -37,7 +37,13 @@ function App() {
   }
 
   const limpar = () => {
+    if(timer !== null) {
+      clearInterval(timer);
+      timer == null;
+    }
 
+    setTempo(0);
+    setBtnTitle([ 'Vai', 'Limpar' ]);
   }
 
   return (
