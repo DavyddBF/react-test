@@ -15,7 +15,7 @@ function App() {
 
   const [tempo, setTempo] = useState(0);
   const [btnTitle, setBtnTitle] = useState([ 'Vai', 'Limpar' ]);
-  let timer = useRef(null);
+  const timer = useRef(null);
 
   const iniciar = () => {
 
