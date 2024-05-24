@@ -13,8 +13,9 @@ function Btn(props) {
 
 function App() {
 
-  const [tempo, setTempo] = useState('0.0')
-  const [btnTitle, setBtnTitle] = useState([ 'Vai', 'Limpar' ])
+  const [tempo, setTempo] = useState(0);
+  const [btnTitle, setBtnTitle] = useState([ 'Vai', 'Limpar' ]);
+  let temp = 0;
   let timer = null;
 
   const iniciar = () => {
@@ -28,7 +29,7 @@ function App() {
     } else {
 
       timer = setInterval(() => {
-        setTempo( tempo += 0.1 );
+        setTempo( temp += 0.1 );
       }, 100);
 
       setBtnTitle([ 'Pausar', 'Limpar' ]);
@@ -42,13 +43,14 @@ function App() {
   return (
     <div className='container'>
         <img className='img' src={ cronometroImg } />
-        <a className='timer' >{ tempo }</a>
+        <a className='timer' >{ tempo.toFixed(1) }</a>
         <div className='area-btn'>
           <Btn click={ iniciar } title={ btnTitle[0] } />
-          <Btn click={ iniciar } title={ btnTitle[1] } />
+          <Btn click={ limpar } title={ btnTitle[1] } />
         </div>
     </div>
   );
 }
 
 export default App;
+
