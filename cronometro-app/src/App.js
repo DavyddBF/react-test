@@ -15,6 +15,29 @@ function App() {
 
   const [tempo, setTempo] = useState('0.0')
   const [btnTitle, setBtnTitle] = useState([ 'Vai', 'Limpar' ])
+  let timer = null;
+
+  const iniciar = () => {
+
+    if(timer !== null) {
+
+      clearInterval(timer);
+      timer = null;
+
+      setBtnTitle([ 'Vai', 'Limpar' ]);
+    } else {
+
+      timer = setInterval(() => {
+        setTempo( tempo += 0.1 );
+      }, 100);
+
+      setBtnTitle([ 'Pausar', 'Limpar' ]);
+    }
+  }
+
+  const limpar = () => {
+
+  }
 
   return (
     <div>
