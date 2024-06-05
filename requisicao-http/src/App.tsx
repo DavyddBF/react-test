@@ -6,11 +6,15 @@ import './App.css';
 
 // [ Código em forma de classe]
 
-class App extends Component{
+interface  AppState {
+  nutri: NutriCard[];
+}
+
+class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      nutri: []
+      nutri: [],
     };
   }
 
