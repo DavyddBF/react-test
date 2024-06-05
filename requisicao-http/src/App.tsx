@@ -1,13 +1,27 @@
-import { useEffect, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 
 import { NutriCard } from './nutriCard';
 import './App.css';
 
 
-
 // [ Código em forma de classe]
 
+class App extends Component{
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      nutri: []
+    };
+  }
 
+  render() {
+    return (
+      <div>
+
+      </div>
+    );
+  }
+}
 
 // [ Código em forma de função ]
 
