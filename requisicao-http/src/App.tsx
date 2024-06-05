@@ -16,6 +16,21 @@ class App extends Component<{}, AppState> {
     this.state = {
       nutri: [],
     };
+
+    this.carregaApi = this.carregaApi.bind(this);
+  }
+
+  componentDidMount(): void {
+      this.carregaApi();
+  }
+
+  async carregaApi() {
+    const api: string = 'https://sujeitoprogramador.com/rn-api/?api=posts';
+
+    const dados: Response = await fetch(api);
+    const dadosConvertidos: NutriCard[] = await dados.json();
+
+    this.setState({ nutri: dadosConvertidos });
   }
 
   render() {
@@ -61,7 +76,7 @@ class App extends Component<{}, AppState> {
 //   }, []);
 
 //   return (
-//     <div>
+//     <div className:'container'>
 //       <header>
 //         <strong>React Nutri</strong>
 //       </header>
