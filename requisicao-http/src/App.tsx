@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+
+import { NutriCard } from './nutriCard';
 import './App.css';
 
 function App() {
