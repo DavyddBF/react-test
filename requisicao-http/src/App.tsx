@@ -20,9 +20,24 @@ class App extends Component<{}, AppState> {
 
   render() {
     return (
-      <div>
+      <div className="container">
+      <header>
+        <strong>React Nutri</strong>
+      </header>
 
-      </div>
+      {
+        this.state.nutri.map((item: NutriCard) => {
+          return (
+            <article className='post' key={ item.id }>
+              <strong className='titulo'>{ item.titulo }</strong>
+              <img className='capa' src={ item.capa } alt={ item.titulo } />
+              <p className='subtitulo'>{ item.subtitulo }</p>
+              <a className='btn'>Acessar</a>
+            </article>
+          );
+        })
+      }
+    </div>
     );
   }
 }
