@@ -1,7 +1,11 @@
 import { AxiosResponse } from "axios";
 import { Component, ReactNode } from "react";
+
 import api from "../../services/api";
 import FilmeType from "../../filme";
+
+import './home.css';
+import { Link } from "react-router-dom";
 
 interface ComponenteState {
     filmes: FilmeType[],
@@ -36,9 +40,35 @@ class Home extends Component<{}, ComponenteState> {
     }
 
     public render(): ReactNode {
-        return (
-            <div>
+        if (this.state.loading) {
+            return (
+                <div>
+                    <h1>Carregando...</h1>
+                </div>
+            );
+        };
 
+        return (
+            <div className="container">
+                <div className="filmes__lista">
+                    {
+                        this.state.filmes.map((filme: FilmeType) => {
+                            return (
+                                <article key={ filme.id }>
+                                    <div>
+                                        <strong className="filmes__titulo">{ filme.title }</strong>
+                                    </div>
+                                    <div>
+                                        <img className="filmes__img" src={`https://image.tmdb.org/t/p/original/${ filme.poster_path }`} alt={ filme.title } />
+                                    </div>
+                                    <div>
+                                        <Link className="filmes__acessar" to={`/filme/${ filme.id }`}>Acessar</Link>
+                                    </div>
+                                </article>
+                            );
+                        })
+                    }
+                </div>
             </div>
         );
     }
