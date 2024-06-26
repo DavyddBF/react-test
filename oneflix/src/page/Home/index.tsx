@@ -23,7 +23,7 @@ class Home extends Component<{}, ComponenteState> {
         this.componentDidMount = this.componentDidMount.bind(this);
     }
 
-    async componentDidMount(): Promise<void> {
+    public async componentDidMount(): Promise<void> {
         const resposta: AxiosResponse<any, any> = await api.get("movie/now_playing", {
             params: {
                 api_key: '184ee90db92bf2330058b37260977a7f',
