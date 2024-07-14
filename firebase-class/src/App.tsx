@@ -1,3 +1,14 @@
+import {
+  doc,
+  addDoc,
+  collection,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  onSnapshot
+} from 'firebase/firestore';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { db, auth } from './firebase/firebase';
 import { Component } from 'react';
 import './App.css';
 
