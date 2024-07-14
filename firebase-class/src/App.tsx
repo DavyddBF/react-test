@@ -39,7 +39,19 @@ class App extends Component<{}, AppState>  {
   }
 
   public async novoUsuario(): Promise<void> {
-
+    await createUserWithEmailAndPassword(auth, this.state.email, this.state.senha)
+    .then(() => {
+      console.log('Cadastrado com sucesso!!!');
+      this.setState({ email: ''});
+      this.setState({ senha: ''});
+  })
+  .catch((erro) => {
+      if(erro.code == 'auth/weak-password'){
+          alert('Senha muito fraca!!');
+      } else if (erro.code == 'auth/email-already-in-use') {
+          alert('Email já existe!!');
+      }
+  });
   }
 
   public render(): JSX.Element {
