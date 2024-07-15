@@ -64,6 +64,8 @@ class App extends Component<{}, AppState>  {
     })
     .then(() => {
       toast.success('Cadastrado com sucesso!!!');
+      this.setState({ user: '' });
+      this.setState({ senha: '' });
     })
     .catch((erro) => {
       toast.error('Houve um erro ao cadastrar: ' + erro);
