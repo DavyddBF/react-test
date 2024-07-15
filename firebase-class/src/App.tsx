@@ -73,14 +73,14 @@ class App extends Component<{}, AppState>  {
 
   public async novoUsuario(): Promise<void> {
     await createUserWithEmailAndPassword(auth, this.state.email, this.state.senha)
-    .then(() => {
+    .then((): void => {
         toast.success('Email e senha cadastrados com sucesso!!!');
         this.setState({
           email: '',
           senha: ''
         });
     })
-    .catch((erro: any) => {
+    .catch((erro: any): void => {
         if(erro.code == 'auth/weak-password'){
             toast.warn('Senha muito fraca!!');
         } else if (erro.code == 'auth/email-already-in-use') {
@@ -94,12 +94,12 @@ class App extends Component<{}, AppState>  {
       user: this.state.user,
       idade: this.state.idade
     })
-    .then(() => {
+    .then((): void => {
       toast.success('Cadastrado com sucesso!!!');
       this.setState({ user: '' });
       this.setState({ idade: '' });
     })
-    .catch((erro: any) => {
+    .catch((erro: any): void => {
       toast.error('Houve um erro ao cadastrar:');
       toast.error(erro);
     });
@@ -107,7 +107,7 @@ class App extends Component<{}, AppState>  {
 
   public async buscarTodosUsers(): Promise<void> {
     await getDocs(collection(db, 'user'))
-    .then((snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
+    .then((snapshot: QuerySnapshot<DocumentData, DocumentData>): void => {
       let lista: Users[] = [];
 
       snapshot.forEach((user: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
@@ -120,7 +120,7 @@ class App extends Component<{}, AppState>  {
 
       this.setState({ users: lista });
     })
-    .catch(() => {
+    .catch((): void => {
       toast.error('Houve um erro ao buscar todos os usuários!!')
     });
   }
@@ -130,21 +130,21 @@ class App extends Component<{}, AppState>  {
       user: this.state.user,
       idade: this.state.idade
     })
-    .then(() => {
+    .then((): void => {
       toast.success('Atualizado com sucesso!');
       this.setState({
         user: '',
         idade: ''
       });
     })
-    .catch((erro: any) => {
+    .catch((erro: any): void => {
       toast.error(erro);
     });
   }
 
   public async excluirUser(id: string): Promise<void> {
     await deleteDoc(doc(db, 'user', id))
-    .then(() => {
+    .then((): void => {
       toast.success('Deletado com sucesso!!');
     });
   }
@@ -227,20 +227,19 @@ class App extends Component<{}, AppState>  {
                       })
                   }
                 </ul>
-                <ul>
-                        
-                        {
-                            this.idadeFiltrada.map((maioresVinte: Users): JSX.Element => {
-                                return (
-                                    <li key={maioresVinte.id}>
-                                        <strong>ID: { maioresVinte.id }</strong> <br/>
-                                        <span>User: { maioresVinte.user }</span> <br/>
-                                        <span>Idade: { maioresVinte.idade }</span> <br/> <br/>
-                                    </li>
-                                );
-                            })
-                        }
-                    </ul>
+                <ul>    
+                  {
+                      this.idadeFiltrada.map((maioresVinte: Users): JSX.Element => {
+                          return (
+                              <li key={maioresVinte.id}>
+                                  <strong>ID: { maioresVinte.id }</strong> <br/>
+                                  <span>User: { maioresVinte.user }</span> <br/>
+                                  <span>Idade: { maioresVinte.idade }</span> <br/> <br/>
+                              </li>
+                          );
+                      })
+                  }
+                </ul>
                 </div>
             </div>
 
