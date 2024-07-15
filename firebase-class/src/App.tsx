@@ -162,7 +162,7 @@ class App extends Component<{}, AppState>  {
                 placeholder='Insira seu email'
                 value={ this.state.email }
                 onChange={ 
-                  (evento: React.ChangeEvent<HTMLInputElement>) => {
+                  (evento: React.ChangeEvent<HTMLInputElement>): void => {
                     return this.setState({ email: evento.target.value });
                   }
                 }
@@ -174,7 +174,7 @@ class App extends Component<{}, AppState>  {
                 placeholder='Insira sua senha'
                 value={ this.state.senha }
                 onChange={ 
-                  (evento: React.ChangeEvent<HTMLInputElement>) => {
+                  (evento: React.ChangeEvent<HTMLInputElement>): void => {
                     return this.setState({ senha: evento.target.value });
                   } 
                 }
@@ -190,7 +190,7 @@ class App extends Component<{}, AppState>  {
                     placeholder='Digite o seu nome/user'
                     value={ this.state.user }
                     onChange={ 
-                      (evento: React.ChangeEvent<HTMLInputElement>) => {
+                      (evento: React.ChangeEvent<HTMLInputElement>): void => {
                         return this.setState({ user: evento.target.value });
                       }
                     }
@@ -202,7 +202,7 @@ class App extends Component<{}, AppState>  {
                     placeholder='Digite sua idade'
                     value={ this.state.idade }
                     onChange={ 
-                      (evento: React.ChangeEvent<HTMLInputElement>) => {
+                      (evento: React.ChangeEvent<HTMLInputElement>): void => {
                         return this.setState({ idade: evento.target.value });
                       }
                     }
@@ -220,8 +220,8 @@ class App extends Component<{}, AppState>  {
                                   <strong>ID: { user.id }</strong> <br/>
                                   <span>User: { user.user }</span> <br/>
                                   <span>Idade: { user.idade }</span> <br/>
-                                  <button onClick={ () => this.excluirUser(user.id) }>Excluir</button>
-                                  <button onClick={ () => this.atualizarUser(user.id) }>Editar</button> <br/><br/>
+                                  <button onClick={ (): Promise<void> => this.excluirUser(user.id) }>Excluir</button>
+                                  <button onClick={ (): Promise<void> => this.atualizarUser(user.id) }>Editar</button> <br/><br/>
                               </li>
                           );
                       })
