@@ -49,8 +49,10 @@ class App extends Component<{}, AppState>  {
     await createUserWithEmailAndPassword(auth, this.state.email, this.state.senha)
     .then(() => {
         toast.success('Email e senha cadastrados com sucesso!!!');
-        this.setState({ email: ''});
-        this.setState({ senha: ''});
+        this.setState({
+          email: '',
+          senha: ''
+        });
     })
     .catch((erro: any) => {
         if(erro.code == 'auth/weak-password'){
@@ -69,10 +71,11 @@ class App extends Component<{}, AppState>  {
     .then(() => {
       toast.success('Cadastrado com sucesso!!!');
       this.setState({ user: '' });
-      this.setState({ senha: '' });
+      this.setState({ idade: '' });
     })
     .catch((erro: any) => {
-      toast.error('Houve um erro ao cadastrar: ' + erro);
+      toast.error('Houve um erro ao cadastrar:');
+      toast.error(erro);
     });
   }
 
@@ -97,7 +100,20 @@ class App extends Component<{}, AppState>  {
   }
 
   public async atualizarUser(id: string): Promise<void> {
-
+    await updateDoc(doc(db, 'user', id), {
+      user: this.state.user,
+      idade: this.state.idade
+    })
+    .then(() => {
+      toast.success('Atualizado com sucesso!');
+      this.setState({
+        user: '',
+        idade: ''
+      });
+    })
+    .catch((erro: any) => {
+      toast.error(erro);
+    });
   }
 
   public async excluirUser(id: string): Promise<void> {
