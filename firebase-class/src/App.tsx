@@ -5,7 +5,11 @@ import {
   getDocs,
   updateDoc,
   deleteDoc,
-  onSnapshot
+  onSnapshot,
+
+  QuerySnapshot,
+  DocumentData,
+  QueryDocumentSnapshot
 } from 'firebase/firestore';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { db, auth } from './firebase/firebase';
@@ -73,7 +77,23 @@ class App extends Component<{}, AppState>  {
   }
 
   public async buscarTodosUsers(): Promise<void> {
+    await getDocs(collection(db, 'user'))
+    .then((snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
+      let lista: Users[] = [];
 
+      snapshot.forEach((user: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+        lista.push({
+          id: user.id,
+          user: user.data().user,
+          idade: user.data().idade
+        })
+      });
+
+      this.setState({ users: lista });
+    })
+    .catch(() => {
+      toast.error('Houve um erro ao buscar todos os usuários!!')
+    });
   }
 
   public render(): JSX.Element {
