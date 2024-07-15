@@ -11,7 +11,7 @@ import {
   DocumentData,
   QueryDocumentSnapshot
 } from 'firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, Unsubscribe } from 'firebase/auth';
 import { db, auth } from './firebase/firebase';
 import { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
@@ -43,6 +43,22 @@ class App extends Component<{}, AppState>  {
       senha: '',
       users: []
     }
+  }
+
+  public componentDidMount(): void {
+    const unsub: Unsubscribe = onSnapshot(collection(db, 'user'), (snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
+      let listaUser: Users[] = [];
+
+      snapshot.forEach((user: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
+        listaUser.push({
+          id: user.id,
+          user: user.data().user,
+          idade: user.data().idade
+        })
+      });
+
+      this.setState({ users: listaUser });
+    });
   }
 
   public async novoUsuario(): Promise<void> {
