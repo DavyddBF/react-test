@@ -10,6 +10,9 @@ import {
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { db, auth } from './firebase/firebase';
 import { Component } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 interface Users {
@@ -55,7 +58,16 @@ class App extends Component<{}, AppState>  {
   }
 
   public async cadastrarUser(): Promise<void> {
-    
+    await addDoc(collection(db, 'user'), {
+      user: this.state.user,
+      idade: this.state.idade
+    })
+    .then(() => {
+      
+    })
+    .catch(() => {
+
+    });
   }
 
   public async buscarTodosUsers(): Promise<void> {
@@ -109,6 +121,7 @@ class App extends Component<{}, AppState>  {
                 <button className='btn' onClick={ this.buscarTodosUsers }>Buscar usuários</button> <br/>
 
             </div>
+            <ToastContainer autoClose={3000} />
       </div>
     );
   }
