@@ -96,6 +96,14 @@ class App extends Component<{}, AppState>  {
     });
   }
 
+  public async atualizarUser(id: string): Promise<void> {
+
+  }
+
+  public async excluirUser(id: string): Promise<void> {
+    
+  }
+
   public render(): JSX.Element {
     return (
       <div>
@@ -158,6 +166,21 @@ class App extends Component<{}, AppState>  {
                 <button className='btn' onClick={ this.cadastrarUser }>Cadastrar</button>
                 <button className='btn' onClick={ this.buscarTodosUsers }>Buscar usuários</button> <br/>
 
+                <ul>
+                  {
+                      this.state.users.map((user: Users) => {
+                          return (
+                              <li key={user.id}>
+                                  <strong>ID: { user.id }</strong> <br/>
+                                  <span>User: { user.user }</span> <br/>
+                                  <span>Idade: { user.idade }</span> <br/>
+                                  <button onClick={ () => this.excluirUser(user.id) }>Excluir</button>
+                                  <button onClick={ () => this.atualizarUser(user.id) }>Editar</button> <br/><br/>
+                              </li>
+                          );
+                      })
+                  }
+                </ul>
             </div>
 
             <ToastContainer autoClose={3000} />
