@@ -52,7 +52,7 @@ class App extends Component<{}, AppState>  {
         this.setState({ email: ''});
         this.setState({ senha: ''});
     })
-    .catch((erro) => {
+    .catch((erro: any) => {
         if(erro.code == 'auth/weak-password'){
             toast.warn('Senha muito fraca!!');
         } else if (erro.code == 'auth/email-already-in-use') {
@@ -71,7 +71,7 @@ class App extends Component<{}, AppState>  {
       this.setState({ user: '' });
       this.setState({ senha: '' });
     })
-    .catch((erro) => {
+    .catch((erro: any) => {
       toast.error('Houve um erro ao cadastrar: ' + erro);
     });
   }
@@ -108,7 +108,11 @@ class App extends Component<{}, AppState>  {
                 type="email" 
                 placeholder='Insira seu email'
                 value={ this.state.email }
-                onChange={ (evento) => this.setState({ email: evento.target.value }) }
+                onChange={ 
+                  (evento: React.ChangeEvent<HTMLInputElement>) => {
+                    return this.setState({ email: evento.target.value });
+                  }
+                }
             />
 
             <label>Senha:</label>
@@ -116,7 +120,11 @@ class App extends Component<{}, AppState>  {
                 type="password" 
                 placeholder='Insira sua senha'
                 value={ this.state.senha }
-                onChange={ (evento) => this.setState({ senha: evento.target.value }) }
+                onChange={ 
+                  (evento: React.ChangeEvent<HTMLInputElement>) => {
+                    return this.setState({ senha: evento.target.value });
+                  } 
+                }
             />
             <br/>
             <button onClick={ this.novoUsuario }>Cadastrar</button>
@@ -128,7 +136,11 @@ class App extends Component<{}, AppState>  {
                     type='text' 
                     placeholder='Digite o seu nome/user'
                     value={ this.state.user }
-                    onChange={ (evento) => this.setState({ user: evento.target.value }) }
+                    onChange={ 
+                      (evento: React.ChangeEvent<HTMLInputElement>) => {
+                        return this.setState({ user: evento.target.value });
+                      }
+                    }
                 />
 
                 <label>Idade:</label>
@@ -136,7 +148,11 @@ class App extends Component<{}, AppState>  {
                     type="text" 
                     placeholder='Digite sua idade'
                     value={ this.state.idade }
-                    onChange={ (evento) => this.setState({ idade: evento.target.value }) }
+                    onChange={ 
+                      (evento: React.ChangeEvent<HTMLInputElement>) => {
+                        return this.setState({ idade: evento.target.value });
+                      }
+                    }
                 /> <br/>
 
                 <button className='btn' onClick={ this.cadastrarUser }>Cadastrar</button>
