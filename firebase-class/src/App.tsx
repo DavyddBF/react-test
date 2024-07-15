@@ -117,7 +117,10 @@ class App extends Component<{}, AppState>  {
   }
 
   public async excluirUser(id: string): Promise<void> {
-    
+    await deleteDoc(doc(db, 'user', id))
+    .then(() => {
+      toast.success('Deletado com sucesso!!');
+    });
   }
 
   public render(): JSX.Element {
