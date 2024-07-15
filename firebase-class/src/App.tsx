@@ -34,6 +34,8 @@ interface AppState {
 }
 
 class App extends Component<{}, AppState>  {
+  private unsub: Unsubscribe | null = null;
+
   constructor(props: any) {
     super(props);
     this.state = {
@@ -46,7 +48,7 @@ class App extends Component<{}, AppState>  {
   }
 
   public componentDidMount(): void {
-    const unsub: Unsubscribe = onSnapshot(collection(db, 'user'), (snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
+    this.unsub = onSnapshot(collection(db, 'user'), (snapshot: QuerySnapshot<DocumentData, DocumentData>) => {
       let listaUser: Users[] = [];
 
       snapshot.forEach((user: QueryDocumentSnapshot<DocumentData, DocumentData>) => {
@@ -60,6 +62,12 @@ class App extends Component<{}, AppState>  {
       this.setState({ users: listaUser });
     });
   }
+  
+  public componentWillUnmount(): void {
+    if(this.unsub) {
+      this.unsub();
+    }
+  } 
 
   public async novoUsuario(): Promise<void> {
     await createUserWithEmailAndPassword(auth, this.state.email, this.state.senha)
