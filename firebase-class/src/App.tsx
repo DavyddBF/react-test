@@ -44,15 +44,15 @@ class App extends Component<{}, AppState>  {
   public async novoUsuario(): Promise<void> {
     await createUserWithEmailAndPassword(auth, this.state.email, this.state.senha)
     .then(() => {
-        console.log('Cadastrado com sucesso!!!');
+        toast.success('Email e senha cadastrados com sucesso!!!');
         this.setState({ email: ''});
         this.setState({ senha: ''});
     })
     .catch((erro) => {
         if(erro.code == 'auth/weak-password'){
-            alert('Senha muito fraca!!');
+            toast.warn('Senha muito fraca!!');
         } else if (erro.code == 'auth/email-already-in-use') {
-            alert('Email já existe!!');
+            toast.warn('Email já existe!!');
         }
     });
   }
@@ -63,10 +63,10 @@ class App extends Component<{}, AppState>  {
       idade: this.state.idade
     })
     .then(() => {
-      
+      toast.success('Cadastrado com sucesso!!!');
     })
-    .catch(() => {
-
+    .catch((erro) => {
+      toast.error('Houve um erro ao cadastrar: ' + erro);
     });
   }
 
@@ -121,7 +121,7 @@ class App extends Component<{}, AppState>  {
                 <button className='btn' onClick={ this.buscarTodosUsers }>Buscar usuários</button> <br/>
 
             </div>
-            
+
             <ToastContainer autoClose={3000} />
       </div>
     );
