@@ -121,6 +121,7 @@ class App extends Component<{}, AppState>  {
                 <button className='btn' onClick={ this.buscarTodosUsers }>Buscar usuários</button> <br/>
 
             </div>
+            
             <ToastContainer autoClose={3000} />
       </div>
     );
