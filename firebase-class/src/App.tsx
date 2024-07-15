@@ -35,6 +35,7 @@ interface AppState {
 
 class App extends Component<{}, AppState>  {
   private unsub: Unsubscribe | null = null;
+  public idadeFiltrada: Users[];
 
   constructor(props: any) {
     super(props);
@@ -45,6 +46,7 @@ class App extends Component<{}, AppState>  {
       senha: '',
       users: []
     }
+    this.idadeFiltrada = this.state.users.filter((user: Users) => Number(user.idade) > 20);
   }
 
   public componentDidMount(): void {
@@ -209,9 +211,10 @@ class App extends Component<{}, AppState>  {
                 <button className='btn' onClick={ this.cadastrarUser }>Cadastrar</button>
                 <button className='btn' onClick={ this.buscarTodosUsers }>Buscar usuários</button> <br/>
 
+                <div className="flex">
                 <ul>
                   {
-                      this.state.users.map((user: Users) => {
+                      this.state.users.map((user: Users): JSX.Element => {
                           return (
                               <li key={user.id}>
                                   <strong>ID: { user.id }</strong> <br/>
@@ -224,6 +227,21 @@ class App extends Component<{}, AppState>  {
                       })
                   }
                 </ul>
+                <ul>
+                        
+                        {
+                            this.idadeFiltrada.map((maioresVinte: Users): JSX.Element => {
+                                return (
+                                    <li key={maioresVinte.id}>
+                                        <strong>ID: { maioresVinte.id }</strong> <br/>
+                                        <span>User: { maioresVinte.user }</span> <br/>
+                                        <span>Idade: { maioresVinte.idade }</span> <br/> <br/>
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
             </div>
 
             <ToastContainer autoClose={3000} />
